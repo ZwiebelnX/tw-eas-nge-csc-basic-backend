@@ -2,9 +2,7 @@ package com.tw.csc.nge.backend.basicbackend.model.po;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -13,7 +11,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Builder
 @Table(name = "goods")
-public class GoodsPO extends BasicPO{
+public class GoodsPO extends BasicPO {
 
     @Column(length = 128)
     private String name;
@@ -27,7 +25,9 @@ public class GoodsPO extends BasicPO{
     @Column(length = 256)
     private String imageUrl;
 
-
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private StorePO storePO;
 
 
 }

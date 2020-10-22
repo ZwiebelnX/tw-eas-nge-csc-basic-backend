@@ -3,10 +3,7 @@ package com.tw.csc.nge.backend.basicbackend.model.po;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -21,7 +18,12 @@ public class CouponInfoPO extends BasicPO {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "store_id")
     private StorePO storePO;
+
+    @ManyToOne
+    @JoinColumn(name = "coupon_type_id")
+    private CouponTypePO couponTypePO;
 
 
 }
