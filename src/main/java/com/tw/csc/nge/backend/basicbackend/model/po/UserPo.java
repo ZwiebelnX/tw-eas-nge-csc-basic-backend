@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Builder
 @Table(name = "user")
-public class UserPO extends BasicPO {
+public class UserPo extends BasicPo{
 
     @Column(nullable = false, length = 32)
     private String nickname;

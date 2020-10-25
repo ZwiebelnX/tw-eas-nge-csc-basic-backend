@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Table(name = "goods")
-public class GoodsPO extends BasicPO {
+public class GoodsPo extends BasicPo{
 
     @Column(length = 128)
     private String name;
@@ -27,7 +27,7 @@ public class GoodsPO extends BasicPO {
 
     @ManyToOne
     @JoinColumn(name = "store_id")
-    private StorePO storePO;
+    private StorePo storePO;
 
 
 }

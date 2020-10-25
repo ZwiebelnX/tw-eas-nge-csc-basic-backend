@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Builder
 @Data
 @Table(name = "store")
-public class StorePO extends BasicPO {
+public class StorePo extends BasicPo{
 
     @Column(length = 16)
     private String name;

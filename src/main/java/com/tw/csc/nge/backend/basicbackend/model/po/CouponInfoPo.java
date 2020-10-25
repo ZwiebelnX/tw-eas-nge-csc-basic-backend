@@ -12,18 +12,18 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Table(name = "coupon_info")
-public class CouponInfoPO extends BasicPO {
+public class CouponInfoPo extends BasicPo{
 
     @Column(length = 64)
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "store_id")
-    private StorePO storePO;
+    private StorePo storePO;
 
     @ManyToOne
     @JoinColumn(name = "coupon_type_id")
-    private CouponTypePO couponTypePO;
+    private CouponTypePo couponTypePO;
 
 
 }

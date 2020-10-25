@@ -11,11 +11,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Table(name = "order_info")
-public class OrderInfoPO extends BasicPO {
+public class OrderInfoPo extends BasicPo{
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserPO userPO;
+    private UserPo userPO;
 
     @Column
     private int totalPrice;

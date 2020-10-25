@@ -15,15 +15,15 @@ import java.sql.Timestamp;
 @Builder
 @Entity
 @Table(name = "user_coupon")
-public class UserCouponPO extends BasicPO {
+public class UserCouponPo extends BasicPo{
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserPO userPO;
+    private UserPo userPO;
 
     @ManyToOne
     @JoinColumn(name = "coupon_id")
-    private CouponInfoPO couponPO;
+    private CouponInfoPo couponPO;
 
     private Timestamp expireTime;
 }

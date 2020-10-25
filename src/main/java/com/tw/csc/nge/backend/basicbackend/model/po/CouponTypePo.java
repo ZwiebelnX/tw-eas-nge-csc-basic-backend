@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Builder
 @Data
 @Table(name = "coupon_type")
-public class CouponTypePO extends BasicPO {
+public class CouponTypePo extends BasicPo{
 
     @Column(length = 64)
     private String name;
