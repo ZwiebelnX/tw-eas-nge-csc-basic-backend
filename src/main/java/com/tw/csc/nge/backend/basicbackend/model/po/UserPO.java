@@ -2,7 +2,9 @@ package com.tw.csc.nge.backend.basicbackend.model.po;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -27,4 +29,7 @@ public class UserPO extends BasicPO {
 
     @Column(length = 20)
     private String phone;
+
+    @Column
+    private boolean isAdmin;
 }
