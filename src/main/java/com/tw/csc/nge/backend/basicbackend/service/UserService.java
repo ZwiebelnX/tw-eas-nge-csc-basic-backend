@@ -1,6 +1,6 @@
 package com.tw.csc.nge.backend.basicbackend.service;
 
-import com.tw.csc.nge.backend.basicbackend.model.dto.UserDTO;
+import com.tw.csc.nge.backend.basicbackend.model.dto.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPO;
 import com.tw.csc.nge.backend.basicbackend.repository.UserRepo;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class UserService{
         this.userRepo = userRepo;
     }
 
-    public UserDTO registerUser(UserDTO userDTO){
+    public UserDto registerUser(UserDto userDTO){
         UserPO userPO = UserPO.builder()
                               .email(userDTO.getEmail())
                               .nickname(userDTO.getNickname())

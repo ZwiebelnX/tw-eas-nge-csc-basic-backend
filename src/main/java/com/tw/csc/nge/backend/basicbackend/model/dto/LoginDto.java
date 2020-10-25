@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LoginDTO {
+public class LoginDto{
 
     @NotEmpty(message = "登录名不能为空")
     @Length(min = 1, max = 64)

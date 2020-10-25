@@ -1,6 +1,6 @@
 package com.tw.csc.nge.backend.basicbackend.controller;
 
-import com.tw.csc.nge.backend.basicbackend.model.dto.UserDTO;
+import com.tw.csc.nge.backend.basicbackend.model.dto.UserDto;
 import com.tw.csc.nge.backend.basicbackend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class UserController{
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO registerUser(@Valid @RequestBody UserDTO userDTO){
+    public UserDto registerUser(@Valid @RequestBody UserDto userDTO){
         return userService.registerUser(userDTO);
     }
 

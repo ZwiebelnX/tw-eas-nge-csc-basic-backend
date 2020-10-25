@@ -1,7 +1,7 @@
 package com.tw.csc.nge.backend.basicbackend;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tw.csc.nge.backend.basicbackend.model.dto.UserDTO;
+import com.tw.csc.nge.backend.basicbackend.model.dto.UserDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,7 +27,7 @@ class IntegrationTests{
 
     @Test
     public void should_register_user_when_register_given_user_info() throws Exception{
-        UserDTO userDTO = UserDTO.builder()
+        UserDto userDTO = UserDto.builder()
                                  .nickname("Chen")
                                  .email("sicong.chen@163.com")
                                  .password("12345678")
