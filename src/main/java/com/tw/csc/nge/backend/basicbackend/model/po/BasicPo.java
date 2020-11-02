@@ -4,14 +4,13 @@ package com.tw.csc.nge.backend.basicbackend.model.po;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Data
+@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public class BasicPo{
 
