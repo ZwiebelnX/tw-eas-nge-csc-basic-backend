@@ -1,6 +1,7 @@
 package com.tw.csc.nge.backend.basicbackend.service;
 
-import com.tw.csc.nge.backend.basicbackend.common.exception.UserExistException;
+import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessException;
+import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessExceptionType;
 import com.tw.csc.nge.backend.basicbackend.model.dto.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
 import com.tw.csc.nge.backend.basicbackend.repository.UserRepo;
@@ -17,7 +18,7 @@ public class UserService{
 
     public UserDto registerUser(UserDto userDTO){
         if (userRepo.existsByNicknameOrEmail(userDTO.getNickname(), userDTO.getEmail())){
-            throw new UserExistException();
+            throw new BusinessException(BusinessExceptionType.USER_EXIST);
         }
 
         UserPo userPO = UserPo.builder()
