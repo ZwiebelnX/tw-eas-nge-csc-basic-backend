@@ -6,4 +6,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface UserRepo extends PagingAndSortingRepository<UserPo, Long>{
 
     boolean existsByNicknameOrEmail(String nickname, String email);
+
+    UserPo getByNicknameOrEmail(String nickName, String email);
 }
