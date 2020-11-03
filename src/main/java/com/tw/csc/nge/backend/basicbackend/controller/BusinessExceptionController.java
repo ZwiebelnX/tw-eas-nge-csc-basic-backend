@@ -28,6 +28,7 @@ public class BusinessExceptionController{
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<ErrorDto> errorHandler(Exception e){
+        e.printStackTrace();
         ErrorDto errorDto;
         if(e instanceof BusinessException){
             BusinessException businessException = (BusinessException)e;
