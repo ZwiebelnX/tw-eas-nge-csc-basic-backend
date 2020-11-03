@@ -34,7 +34,7 @@ public class GoodsService{
             GoodsDto goodsDto = GoodsDto.builder()
                                         .id(String.valueOf(goodsPo.getId()))
                                         .description(goodsPo.getDescription())
-                                        .image_url(goodsPo.getImageUrl())
+                                        .imageUrl(goodsPo.getImageUrl())
                                         .name(goodsPo.getName())
                                         .price(goodsPo.getPrice())
                                         .storeId(String.valueOf(goodsPo.getStorePO().getId()))

@@ -18,7 +18,7 @@ public class GoodsDto{
 
     private String description;
 
-    private String image_url;
+    private String imageUrl;
 
     private String name;
 
