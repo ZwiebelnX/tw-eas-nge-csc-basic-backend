@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class BusinessExceptionController{
-
-
+    
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public ResponseEntity<ErrorDto> argumentErrorHandler(MethodArgumentNotValidException e){
         ErrorDto errorDto = ErrorDto.builder()
@@ -25,8 +24,8 @@ public class BusinessExceptionController{
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<ErrorDto> errorHandler(Exception e){
         ErrorDto errorDto;
-        if (e instanceof BusinessException){
-            BusinessException businessException = (BusinessException) e;
+        if(e instanceof BusinessException){
+            BusinessException businessException = (BusinessException)e;
             errorDto = ErrorDto.builder()
                                .errorCode(businessException.getErrorType().getErrorCode())
                                .message(e.getMessage())

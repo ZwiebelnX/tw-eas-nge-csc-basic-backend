@@ -22,7 +22,7 @@ public class GoodsPo extends BasicPo{
     @Column(length = 128)
     private String description;
 
-    @Column(length = 256)
+    @Column(length = 512)
     private String imageUrl;
 
     @ManyToOne

@@ -10,7 +10,7 @@ public class BusinessException extends RuntimeException{
     }
 
     public BusinessException(BusinessExceptionType errorType, String extraMessage){
-        super(errorType.getErrorMessage() + "\r\nextra message:" + extraMessage);
+        super(errorType.getErrorMessage() + " && 额外信息：" + extraMessage);
         this.errorType = errorType;
     }
 
