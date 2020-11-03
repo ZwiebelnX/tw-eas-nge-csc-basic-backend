@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -22,7 +23,8 @@ public class LoginController{
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto userLogin(@RequestBody LoginDto loginDto, HttpSession httpSession){
+    public UserDto userLogin(@RequestBody LoginDto loginDto, HttpServletRequest httpServletRequest){
+        HttpSession httpSession = httpServletRequest.getSession(!httpServletRequest.isRequestedSessionIdValid());
         return loginService.userLogin(loginDto, httpSession);
     }
 
