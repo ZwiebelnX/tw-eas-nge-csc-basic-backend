@@ -26,5 +26,11 @@ public class LoginController{
         return loginService.userLogin(loginDto, httpSession);
     }
 
+    @PostMapping("/logout")
+    @ResponseStatus(HttpStatus.OK)
+    public void userLogout(HttpSession httpSession){
+        loginService.userLogout(httpSession);
+    }
+
 
 }

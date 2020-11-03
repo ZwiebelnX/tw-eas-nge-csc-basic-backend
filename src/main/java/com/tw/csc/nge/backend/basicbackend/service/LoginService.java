@@ -47,5 +47,11 @@ public class LoginService{
         return userDto;
     }
 
-
+    public void userLogout(HttpSession httpSession){
+        UserDto userDto = (UserDto)httpSession.getAttribute("userInfo");
+        if(userDto != null){
+            HttpSession oldHttpSession = userMap.remove(Long.parseLong(userDto.getId()));
+            oldHttpSession.invalidate();
+        }
+    }
 }
