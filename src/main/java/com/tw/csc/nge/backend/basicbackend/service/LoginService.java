@@ -31,7 +31,7 @@ public class LoginService{
 
         userMap.compute(userPo.getId(), (key, value) -> {
             if(value != null){
-                value.invalidate();
+                value.removeAttribute("userInfo");
             }
             return httpSession;
         });
@@ -50,8 +50,7 @@ public class LoginService{
     public void userLogout(HttpSession httpSession){
         UserDto userDto = (UserDto)httpSession.getAttribute("userInfo");
         if(userDto != null){
-            HttpSession oldHttpSession = userMap.remove(Long.parseLong(userDto.getId()));
-            oldHttpSession.invalidate();
+            userMap.remove(Long.parseLong(userDto.getId()));
         }
     }
 }

@@ -15,7 +15,7 @@ public class GoodsControllerTest{
 
     @Autowired
     private MockMvc mockMvc;
-    
+
     @Test
     public void should_return_goods_list_by_pages_when_get_goods() throws Exception{
         mockMvc.perform(get("/goods?pageNum=1"))
@@ -29,7 +29,7 @@ public class GoodsControllerTest{
         mockMvc.perform(get("/goods?pageNum=-1"))
                .andExpect(status().isUnprocessableEntity())
                .andExpect(jsonPath("$.errorCode").value("42202"))
-               .andExpect(jsonPath("$.message").value("GET请求参数非法 && 额外信息：页码不能小于1"));
+               .andExpect(jsonPath("$.errorMessage").value("GET请求参数非法 && 额外信息：页码不能小于1"));
     }
 
 

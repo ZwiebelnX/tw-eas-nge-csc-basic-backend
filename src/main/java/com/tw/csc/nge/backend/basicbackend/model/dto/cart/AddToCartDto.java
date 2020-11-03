@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 @Data
@@ -13,6 +14,7 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 @Builder
 public class AddToCartDto{
+    @NotEmpty(message = "商品ID不能为空")
     @Pattern(regexp = "\\d+", message = "商品ID错误")
     private String goodsId;
 

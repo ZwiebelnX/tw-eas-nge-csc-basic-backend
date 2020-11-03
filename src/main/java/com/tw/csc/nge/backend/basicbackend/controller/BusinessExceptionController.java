@@ -21,7 +21,7 @@ public class BusinessExceptionController{
         }
         ErrorDto errorDto = ErrorDto.builder()
                                     .errorCode(BusinessExceptionType.JSON_ARGUMENT_ILLEGAL.getErrorCode())
-                                    .message(errorMessageBuilder.toString())
+                                    .errorMessage(errorMessageBuilder.toString())
                                     .build();
         return new ResponseEntity<>(errorDto, BusinessExceptionType.JSON_ARGUMENT_ILLEGAL.getHttpStatus());
     }
@@ -34,11 +34,11 @@ public class BusinessExceptionController{
             BusinessException businessException = (BusinessException)e;
             errorDto = ErrorDto.builder()
                                .errorCode(businessException.getErrorType().getErrorCode())
-                               .message(e.getMessage())
+                               .errorMessage(e.getMessage())
                                .build();
             return ResponseEntity.status(businessException.getErrorType().getHttpStatus()).body(errorDto);
         } else{
-            errorDto = ErrorDto.builder().errorCode("50000").message(e.getMessage()).build();
+            errorDto = ErrorDto.builder().errorCode("50000").errorMessage(e.getMessage()).build();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorDto);
         }
 

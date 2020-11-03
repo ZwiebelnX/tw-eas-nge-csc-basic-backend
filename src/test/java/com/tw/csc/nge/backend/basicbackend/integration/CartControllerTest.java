@@ -25,6 +25,14 @@ public class CartControllerTest{
     private final MockHttpSession mockHttpSession = new MockHttpSession();
 
     @Test
+    public void should_throw_exception_when_post_carts_without_login() throws Exception{
+        AddToCartDto addToCartDto = AddToCartDto.builder().goodsId("1").amount(10).build();
+        mockMvc.perform(post("/carts").contentType(MediaType.APPLICATION_JSON)
+                                      .content(objectMapper.writeValueAsString(addToCartDto)).session(mockHttpSession))
+               .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     public void should_add_to_cart_when_post_carts() throws Exception{
         this.doLogin();
         AddToCartDto addToCartDto = AddToCartDto.builder().goodsId("1").amount(10).build();
@@ -32,6 +40,20 @@ public class CartControllerTest{
                                       .content(objectMapper.writeValueAsString(addToCartDto)).session(mockHttpSession))
                .andExpect(status().isCreated())
                .andExpect(jsonPath("$.amount").value(10));
+    }
+
+    @Test
+    public void should_throw_error_when_post_carts_given_illegal_info() throws Exception{
+        this.doLogin();
+        AddToCartDto addToCartDto = AddToCartDto.builder().goodsId(null).amount(10).build();
+        mockMvc.perform(post("/carts").contentType(MediaType.APPLICATION_JSON)
+                                      .content(objectMapper.writeValueAsString(addToCartDto)).session(mockHttpSession))
+               .andExpect(status().isUnprocessableEntity());
+
+        addToCartDto = AddToCartDto.builder().goodsId("1").amount(-1).build();
+        mockMvc.perform(post("/carts").contentType(MediaType.APPLICATION_JSON)
+                                      .content(objectMapper.writeValueAsString(addToCartDto)).session(mockHttpSession))
+               .andExpect(status().isUnprocessableEntity());
     }
 
     private void doLogin() throws Exception{
