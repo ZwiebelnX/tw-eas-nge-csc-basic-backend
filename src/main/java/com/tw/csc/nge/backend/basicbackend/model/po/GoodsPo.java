@@ -13,20 +13,20 @@ import javax.persistence.*;
 @Table(name = "goods")
 public class GoodsPo extends BasicPo{
 
-    @Column(length = 128)
+    @Column(length = 128, nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private int price;
 
-    @Column(length = 128)
+    @Column(length = 128, nullable = false)
     private String description;
 
-    @Column(length = 512)
+    @Column(length = 512, nullable = false)
     private String imageUrl;
 
     @ManyToOne
-    @JoinColumn(name = "store_id")
+    @JoinColumn(name = "store_id", nullable = false)
     private StorePo storePO;
 
 

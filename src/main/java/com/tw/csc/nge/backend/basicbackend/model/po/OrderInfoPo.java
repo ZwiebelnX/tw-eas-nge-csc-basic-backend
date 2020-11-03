@@ -14,16 +14,16 @@ import javax.persistence.*;
 public class OrderInfoPo extends BasicPo{
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserPo userPO;
 
-    @Column
+    @Column(nullable = false)
     private int totalPrice;
 
-    @Column(length = 32)
+    @Column(length = 32, nullable = false)
     private String phone;
 
-    @Column(length = 128)
+    @Column(length = 128, nullable = false)
     private String address;
 
 

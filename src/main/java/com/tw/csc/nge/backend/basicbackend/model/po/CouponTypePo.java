@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "coupon_type")
 public class CouponTypePo extends BasicPo{
 
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     private String name;
 
     @Column(length = 128)

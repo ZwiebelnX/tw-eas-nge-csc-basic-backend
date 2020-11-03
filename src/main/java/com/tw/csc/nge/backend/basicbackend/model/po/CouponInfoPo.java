@@ -14,15 +14,15 @@ import javax.persistence.*;
 @Table(name = "coupon_info")
 public class CouponInfoPo extends BasicPo{
 
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "store_id")
+    @JoinColumn(name = "store_id", nullable = false)
     private StorePo storePO;
 
     @ManyToOne
-    @JoinColumn(name = "coupon_type_id")
+    @JoinColumn(name = "coupon_type_id", nullable = false)
     private CouponTypePo couponTypePO;
 
 

@@ -15,17 +15,17 @@ import javax.persistence.*;
 public class CartPo extends BasicPo{
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserPo userPO;
 
     @ManyToOne
-    @JoinColumn(name = "goods_id")
+    @JoinColumn(name = "goods_id", nullable = false)
     private GoodsPo goodsPO;
 
-    @Column
+    @Column(nullable = false)
     private int amount;
 
-    @Column
+    @Column(nullable = false)
     private boolean isValid;
 
 }

@@ -16,10 +16,10 @@ import javax.persistence.Table;
 @Table(name = "store")
 public class StorePo extends BasicPo{
 
-    @Column(length = 16)
+    @Column(length = 16, nullable = false)
     private String name;
 
-    @Column(length = 128)
+    @Column(length = 128, nullable = false)
     private String description;
 
 }

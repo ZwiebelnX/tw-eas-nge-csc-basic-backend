@@ -14,11 +14,11 @@ import javax.persistence.*;
 public class OrderGoodsPo extends BasicPo{
 
     @ManyToOne
-    @JoinColumn(name = "order_info_id")
+    @JoinColumn(name = "order_info_id", nullable = false)
     private OrderInfoPo orderInfoPO;
 
     @ManyToOne
-    @JoinColumn(name = "goods_id")
+    @JoinColumn(name = "goods_id", nullable = false)
     private GoodsPo goodsPO;
 
     @Column
