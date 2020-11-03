@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 public enum BusinessExceptionType{
 
-    JSON_ARGUMENT_ILLEGAL("40001", "JSON请求参数非法", HttpStatus.UNPROCESSABLE_ENTITY),
+    JSON_ARGUMENT_ILLEGAL("42201", "JSON请求参数非法", HttpStatus.UNPROCESSABLE_ENTITY),
     GET_ARGUMENT_ILLEGAL("42202", "GET请求参数非法", HttpStatus.UNPROCESSABLE_ENTITY),
     USER_EXIST("40002", "昵称或邮箱已存在", HttpStatus.CONFLICT),
     LOGIN_INFO_ILLEGAL("40101", "用户名或密码错误", HttpStatus.UNAUTHORIZED);

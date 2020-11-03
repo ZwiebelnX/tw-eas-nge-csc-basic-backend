@@ -5,20 +5,25 @@ import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessExceptionTyp
 import com.tw.csc.nge.backend.basicbackend.model.dto.ErrorDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class BusinessExceptionController{
-    
+
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public ResponseEntity<ErrorDto> argumentErrorHandler(MethodArgumentNotValidException e){
+        StringBuilder errorMessageBuilder = new StringBuilder();
+        for(ObjectError error: e.getBindingResult().getAllErrors()){
+            errorMessageBuilder.append(error.getDefaultMessage()).append(" ");
+        }
         ErrorDto errorDto = ErrorDto.builder()
                                     .errorCode(BusinessExceptionType.JSON_ARGUMENT_ILLEGAL.getErrorCode())
-                                    .message(e.getMessage())
+                                    .message(errorMessageBuilder.toString())
                                     .build();
-        return ResponseEntity.badRequest().body(errorDto);
+        return new ResponseEntity<>(errorDto, BusinessExceptionType.JSON_ARGUMENT_ILLEGAL.getHttpStatus());
     }
 
     @ExceptionHandler(value = {Exception.class})
