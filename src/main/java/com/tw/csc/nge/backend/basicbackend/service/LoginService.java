@@ -2,8 +2,8 @@ package com.tw.csc.nge.backend.basicbackend.service;
 
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessException;
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessExceptionType;
-import com.tw.csc.nge.backend.basicbackend.model.dto.LoginDto;
-import com.tw.csc.nge.backend.basicbackend.model.dto.UserDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.login.LoginDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
 import com.tw.csc.nge.backend.basicbackend.repository.UserRepo;
 import org.springframework.stereotype.Service;

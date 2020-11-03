@@ -1,6 +1,6 @@
 package com.tw.csc.nge.backend.basicbackend.controller;
 
-import com.tw.csc.nge.backend.basicbackend.model.dto.GoodsDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.goods.GoodsDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.pageable.PageableDto;
 import com.tw.csc.nge.backend.basicbackend.service.GoodsService;
 import org.springframework.http.HttpStatus;
@@ -26,6 +26,6 @@ public class GoodsController{
                                               @RequestParam(required = false, defaultValue = "10") int pageSize){
         return goodsService.getGoodsList(pageNum, pageSize);
     }
-    
+
 
 }

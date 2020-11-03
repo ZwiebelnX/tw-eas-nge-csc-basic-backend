@@ -2,7 +2,7 @@ package com.tw.csc.nge.backend.basicbackend.service;
 
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessException;
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessExceptionType;
-import com.tw.csc.nge.backend.basicbackend.model.dto.GoodsDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.goods.GoodsDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.pageable.PageableDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.GoodsPo;
 import com.tw.csc.nge.backend.basicbackend.repository.GoodsRepo;
@@ -43,6 +43,10 @@ public class GoodsService{
             goodsPageableDto.getData().add(goodsDto);
         }
         return goodsPageableDto;
+    }
+
+    public GoodsPo getGoodsPo(long id){
+        return goodsRepo.findById(id).orElseThrow(() -> new BusinessException(BusinessExceptionType.GOODS_NOT_FOUND));
     }
 }
 

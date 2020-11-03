@@ -2,7 +2,7 @@ package com.tw.csc.nge.backend.basicbackend.service;
 
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessException;
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessExceptionType;
-import com.tw.csc.nge.backend.basicbackend.model.dto.UserDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
 import com.tw.csc.nge.backend.basicbackend.repository.UserRepo;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class UserService{
     }
 
     public UserDto registerUser(UserDto userDTO){
-        if (userRepo.existsByNicknameOrEmail(userDTO.getNickname(), userDTO.getEmail())){
+        if(userRepo.existsByNicknameOrEmail(userDTO.getNickname(), userDTO.getEmail())){
             throw new BusinessException(BusinessExceptionType.USER_EXIST);
         }
 
@@ -34,5 +34,9 @@ public class UserService{
 
         userDTO.setId(String.valueOf(userPO.getId()));
         return userDTO;
+    }
+
+    public UserPo getUserPo(long id){
+        return userRepo.findById(id).orElseThrow(() -> new BusinessException(BusinessExceptionType.USER_NOT_FOUND));
     }
 }

@@ -1,4 +1,4 @@
-package com.tw.csc.nge.backend.basicbackend.model.dto;
+package com.tw.csc.nge.backend.basicbackend.model.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

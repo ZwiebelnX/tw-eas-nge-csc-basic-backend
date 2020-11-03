@@ -1,7 +1,7 @@
 package com.tw.csc.nge.backend.basicbackend.controller;
 
-import com.tw.csc.nge.backend.basicbackend.model.dto.LoginDto;
-import com.tw.csc.nge.backend.basicbackend.model.dto.UserDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.login.LoginDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.service.LoginService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;

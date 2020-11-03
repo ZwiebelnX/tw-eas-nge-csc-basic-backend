@@ -1,6 +1,6 @@
 package com.tw.csc.nge.backend.basicbackend.controller;
 
-import com.tw.csc.nge.backend.basicbackend.model.dto.UserDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

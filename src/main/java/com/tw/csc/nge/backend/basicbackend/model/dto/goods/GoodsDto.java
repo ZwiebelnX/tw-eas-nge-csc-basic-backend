@@ -1,4 +1,4 @@
-package com.tw.csc.nge.backend.basicbackend.model.dto;
+package com.tw.csc.nge.backend.basicbackend.model.dto.goods;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,7 +2,7 @@ package com.tw.csc.nge.backend.basicbackend.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tw.csc.nge.backend.basicbackend.IntegrationTest;
-import com.tw.csc.nge.backend.basicbackend.model.dto.UserDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

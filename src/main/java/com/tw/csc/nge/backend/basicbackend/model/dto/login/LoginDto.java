@@ -1,4 +1,4 @@
-package com.tw.csc.nge.backend.basicbackend.model.dto;
+package com.tw.csc.nge.backend.basicbackend.model.dto.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
