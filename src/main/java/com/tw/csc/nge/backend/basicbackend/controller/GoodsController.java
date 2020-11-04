@@ -27,12 +27,12 @@ public class GoodsController{
     public PageableDto<GoodsDto> getGoodsList(@RequestParam int pageNum,
                                               @RequestParam(required = false, defaultValue = "10") int pageSize){
         if(pageNum <= 0){
-            throw new BusinessException(BusinessExceptionType.GET_ARGUMENT_ILLEGAL, "页码不能小月1");
+            throw new BusinessException(BusinessExceptionType.GET_ARGUMENT_ILLEGAL, "页码不能小于1");
         }
         if(pageSize <= 0){
             throw new BusinessException(BusinessExceptionType.GET_ARGUMENT_ILLEGAL, "页大小不能小于1");
         }
-        
+
         return goodsService.getGoodsList(pageNum, pageSize);
     }
 
