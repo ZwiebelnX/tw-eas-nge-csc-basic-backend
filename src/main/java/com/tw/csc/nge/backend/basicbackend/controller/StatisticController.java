@@ -30,9 +30,7 @@ public class StatisticController{
 
     @PatchMapping
     @ResponseStatus(HttpStatus.OK)
-    public StatisticInfoDto modifyStatistic(HttpSession httpSession,
-                                            @Valid @RequestBody ModifyStatisticDto modifyStatisticDto){
-        long userId = Long.parseLong(((UserDto)httpSession.getAttribute("userInfo")).getId());
-        return statisticService.modifyStatistic(userId, modifyStatisticDto);
+    public StatisticInfoDto modifyStatistic(@Valid @RequestBody ModifyStatisticDto modifyStatisticDto){
+        return statisticService.modifyStatistic(modifyStatisticDto);
     }
 }

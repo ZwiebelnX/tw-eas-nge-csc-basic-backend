@@ -36,6 +36,7 @@ public class PoToDtoTransformer{
                       .nickname(userPo.getNickname())
                       .phone(userPo.getPhone())
                       .realName(userPo.getRealName())
+                      .isAdmin(userPo.isAdmin())
                       .build();
     }
 

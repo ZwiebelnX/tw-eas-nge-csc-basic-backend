@@ -42,12 +42,7 @@ public class StatisticService{
     }
 
     @Transactional
-    public StatisticInfoDto modifyStatistic(long userId, ModifyStatisticDto modifyStatisticDto){
-        UserPo userPo = userService.getUserPo(userId);
-        if(!userPo.isAdmin()){
-            throw new BusinessException(BusinessExceptionType.USER_NOT_ADMIN);
-        }
-
+    public StatisticInfoDto modifyStatistic(ModifyStatisticDto modifyStatisticDto){
         StatisticPo statisticPo =
                 statisticRepo.findByName(modifyStatisticDto.getStatisticName())
                              .orElseThrow(() -> new BusinessException(BusinessExceptionType.STATISTIC_NOT_FOUND));

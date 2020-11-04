@@ -1,6 +1,7 @@
 package com.tw.csc.nge.backend.basicbackend.model.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,5 +36,8 @@ public class UserDto{
 
     @Length(max = 20, message = "电话号码不能超过20个字符")
     private String phone;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private boolean isAdmin;
 
 }
