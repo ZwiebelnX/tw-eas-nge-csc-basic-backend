@@ -2,6 +2,7 @@ package com.tw.csc.nge.backend.basicbackend.service;
 
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessException;
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessExceptionType;
+import com.tw.csc.nge.backend.basicbackend.model.dto.coupon.UserCouponDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.CouponInfoPo;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
@@ -52,5 +53,13 @@ public class UserService{
 
     public UserPo getUserPo(long id){
         return userRepo.findById(id).orElseThrow(() -> new BusinessException(BusinessExceptionType.USER_NOT_FOUND));
+    }
+
+    public UserCouponDto addUserCoupon(long userId, long couponId, Timestamp expireTime){
+        CouponInfoPo couponInfoPo = couponInfoService.getCouponInfoPo(couponId);
+
+        return userCouponService.addUserCoupon(userId, couponInfoPo, expireTime == null ?
+                new Timestamp(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7)
+                : expireTime);
     }
 }

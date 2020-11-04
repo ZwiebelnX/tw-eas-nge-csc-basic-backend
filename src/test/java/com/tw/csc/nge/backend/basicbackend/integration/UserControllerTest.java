@@ -2,10 +2,13 @@ package com.tw.csc.nge.backend.basicbackend.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tw.csc.nge.backend.basicbackend.IntegrationTest;
+import com.tw.csc.nge.backend.basicbackend.model.dto.coupon.AddCouponDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.login.LoginDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -59,4 +62,26 @@ class UserControllerTest{
                .andExpect(jsonPath("$.errorCode").value("42201"));
     }
 
+    @Test
+    public void should_add_user_coupon_when_post_user_coupon() throws Exception{
+        MockHttpSession mockHttpSession = doLogin();
+        AddCouponDto addCouponDto = AddCouponDto.builder().id("1").build();
+        mockMvc.perform(post("/users/coupons").contentType(MediaType.APPLICATION_JSON).session(mockHttpSession)
+                                              .content(objectMapper.writeValueAsString(addCouponDto)))
+               .andExpect(status().isCreated())
+               .andExpect(jsonPath("$.couponName").exists());
+    }
+
+
+    private MockHttpSession doLogin() throws Exception{
+        MockHttpSession httpSession = new MockHttpSession();
+        LoginDto loginDto = LoginDto.builder().loginName("sicong.chen@163.com").password("12345678").build();
+        mockMvc.perform(post("/login").contentType(MediaType.APPLICATION_JSON)
+                                      .content(objectMapper.writeValueAsString(loginDto)).session(httpSession))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.id").exists())
+               .andExpect(jsonPath("$.nickname").exists());
+
+        return httpSession;
+    }
 }
