@@ -3,6 +3,7 @@ package com.tw.csc.nge.backend.basicbackend.utils.model;
 import com.tw.csc.nge.backend.basicbackend.model.dto.cart.CartItemDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.coupon.UserCouponDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.goods.GoodsDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.statistic.StatisticInfoDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.store.StoreInfoDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.*;
@@ -50,5 +51,10 @@ public class PoToDtoTransformer{
                            .id(String.valueOf(storePo.getId()))
                            .name(storePo.getName())
                            .description(storePo.getDescription()).build();
+    }
+
+    public static StatisticInfoDto statisticPoToStatisticInfoDto(StatisticPo statisticPo){
+        return StatisticInfoDto.builder().name(statisticPo.getName()).unit(statisticPo.getUnit()).value(String.valueOf(
+                statisticPo.getValue())).build();
     }
 }

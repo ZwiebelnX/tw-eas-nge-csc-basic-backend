@@ -27,7 +27,7 @@ public class LoginService{
     public UserDto userLogin(LoginDto loginDto, HttpSession httpSession){
         UserPo userPo = userRepo.getByNicknameOrEmail(loginDto.getLoginName(), loginDto.getLoginName());
         if(userPo == null || !userPo.getPassword().equals(loginDto.getPassword())){
-            throw new BusinessException(BusinessExceptionType.LOGIN_INFO_ILLEGAL);
+            throw new BusinessException(BusinessExceptionType.USER_TOKEN_ILLEGAL);
         }
 
         userMap.compute(userPo.getId(), (key, value) -> {
