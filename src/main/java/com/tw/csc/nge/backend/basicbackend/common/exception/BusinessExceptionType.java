@@ -11,6 +11,7 @@ public enum BusinessExceptionType{
     COUPON_TYPE_NOT_FOUND("40403", "请求的优惠券类型未找到", HttpStatus.NOT_FOUND),
     COUPON_INFO_NOT_FOUND("40404", "请求的优惠券信息未找到", HttpStatus.NOT_FOUND),
     USER_COUPON_NOT_FOUND("40405", "请求的用户优惠券未找到", HttpStatus.NOT_FOUND),
+    STORE_NOT_FOUND("40406", "请求的商店未找到", HttpStatus.NOT_FOUND),
     USER_EXIST("40002", "昵称或邮箱已存在", HttpStatus.CONFLICT),
     LOGIN_INFO_ILLEGAL("40101", "用户名或密码错误", HttpStatus.UNAUTHORIZED);
 

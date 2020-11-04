@@ -32,5 +32,26 @@ public class GoodsControllerTest{
                .andExpect(jsonPath("$.errorMessage").value("GET请求参数非法 && 额外信息：页码不能小于1"));
     }
 
+    @Test
+    public void should_return_goods_list_by_store_when_get_goods() throws Exception{
+        mockMvc.perform(get("/goods/1?pageNum=1"))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.totalPages").value(1))
+               .andExpect(jsonPath("$.data", hasSize(5)));
+    }
+
+    @Test
+    public void should_throw_exception_when_get_param_illegal() throws Exception{
+        mockMvc.perform(get("/goods/1?pageNum=-1"))
+               .andExpect(status().isUnprocessableEntity())
+               .andExpect(jsonPath("$.errorCode").value("42202"));
+    }
+
+    @Test
+    public void should_throw_exception_when_store_not_exist() throws Exception{
+        mockMvc.perform(get("/goods/10?pageNum=1"))
+               .andExpect(status().isNotFound())
+               .andExpect(jsonPath("$.errorCode").value("40406"));
+    }
 
 }

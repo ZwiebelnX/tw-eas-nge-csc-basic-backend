@@ -34,7 +34,7 @@ public class CartControllerTest{
     public void should_add_to_cart_when_post_carts() throws Exception{
         MockHttpSession mockHttpSession = this.doLogin();
 
-        ModifyCartDto modifyCartDto = ModifyCartDto.builder().goodsId("1").amount(10).build();
+        ModifyCartDto modifyCartDto = ModifyCartDto.builder().goodsId("9").amount(10).build();
         mockMvc.perform(post("/carts").contentType(MediaType.APPLICATION_JSON)
                                       .content(objectMapper.writeValueAsString(modifyCartDto)).session(mockHttpSession))
                .andExpect(status().isCreated())
@@ -89,13 +89,13 @@ public class CartControllerTest{
     public void should_reduce_goods_amount_from_cart_when_delete_cart() throws Exception{
         MockHttpSession mockHttpSession = this.doLogin();
 
-        ModifyCartDto modifyCartDto = ModifyCartDto.builder().goodsId("1").amount(10).build();
+        ModifyCartDto modifyCartDto = ModifyCartDto.builder().goodsId("9").amount(10).build();
         mockMvc.perform(post("/carts").contentType(MediaType.APPLICATION_JSON)
                                       .content(objectMapper.writeValueAsString(modifyCartDto)).session(mockHttpSession))
                .andExpect(status().isCreated())
                .andExpect(jsonPath("$.amount").value(10));
 
-        modifyCartDto = ModifyCartDto.builder().goodsId("1").amount(5).build();
+        modifyCartDto = ModifyCartDto.builder().goodsId("9").amount(5).build();
         mockMvc.perform(delete("/carts").contentType(MediaType.APPLICATION_JSON)
                                         .content(objectMapper.writeValueAsString(modifyCartDto))
                                         .session(mockHttpSession))
@@ -106,7 +106,7 @@ public class CartControllerTest{
     @Test
     public void should_remove_goods_from_cart_when_amount_is_zero_when_delete_cart() throws Exception{
         MockHttpSession mockHttpSession = this.doLogin();
-        ModifyCartDto modifyCartDto = ModifyCartDto.builder().goodsId("1").amount(10).build();
+        ModifyCartDto modifyCartDto = ModifyCartDto.builder().goodsId("9").amount(10).build();
         mockMvc.perform(post("/carts").contentType(MediaType.APPLICATION_JSON)
                                       .content(objectMapper.writeValueAsString(modifyCartDto)).session(mockHttpSession))
                .andExpect(status().isCreated())
