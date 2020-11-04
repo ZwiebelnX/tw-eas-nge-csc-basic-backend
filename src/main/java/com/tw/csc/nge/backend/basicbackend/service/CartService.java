@@ -1,7 +1,7 @@
 package com.tw.csc.nge.backend.basicbackend.service;
 
-import com.tw.csc.nge.backend.basicbackend.model.dto.cart.AddToCartDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.cart.CartItemDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.cart.ModifyCartDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.pageable.PageableDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.CartPo;
 import com.tw.csc.nge.backend.basicbackend.model.po.GoodsPo;
@@ -32,20 +32,20 @@ public class CartService{
 
 
     @Transactional
-    public CartItemDto addGoodsToCart(AddToCartDto addToCartDto, long userId){
+    public CartItemDto addGoodsToCart(ModifyCartDto modifyCartDto, long userId){
         UserPo userPo = userService.getUserPo(userId);
-        GoodsPo goodsPo = goodsService.getGoodsPo(Long.parseLong(addToCartDto.getGoodsId()));
+        GoodsPo goodsPo = goodsService.getGoodsPo(Long.parseLong(modifyCartDto.getGoodsId()));
 
-        CartPo cartPo = cartRepo.findByGoodsPO(goodsPo);
+        CartPo cartPo = cartRepo.findByGoodsPOAndUserPO(goodsPo, userPo);
         if(cartPo == null){
             cartPo = CartPo.builder()
                            .goodsPO(goodsPo)
                            .userPO(userPo)
-                           .amount(addToCartDto.getAmount())
+                           .amount(modifyCartDto.getAmount())
                            .isValid(true)
                            .build();
         } else{
-            cartPo.setAmount(cartPo.getAmount() + addToCartDto.getAmount());
+            cartPo.setAmount(cartPo.getAmount() + modifyCartDto.getAmount());
         }
         cartRepo.save(cartPo);
 
@@ -53,7 +53,7 @@ public class CartService{
 
     }
 
-    public PageableDto<CartItemDto> getGoodsList(long userId, int pageNum, int pageSize){
+    public PageableDto<CartItemDto> getCartList(long userId, int pageNum, int pageSize){
         UserPo userPo = userService.getUserPo(userId);
         Page<CartPo> cartPoPage = cartRepo.findByUserPO(userPo, PageRequest.of(pageNum - 1, pageSize));
         PageableDto<CartItemDto> cartItemListDto =
@@ -63,5 +63,21 @@ public class CartService{
 
         cartPoPage.forEach(cartPo -> cartItemListDto.getData().add(PoToDtoTransformer.cartPoToCartItemDto(cartPo)));
         return cartItemListDto;
+    }
+
+    @Transactional
+    public CartItemDto reduceGoodsInCart(ModifyCartDto modifyCartDto, long userId){
+        UserPo userPo = userService.getUserPo(userId);
+        GoodsPo goodsPo = goodsService.getGoodsPo(Long.parseLong(modifyCartDto.getGoodsId()));
+        CartPo cartPo = cartRepo.findByGoodsPOAndUserPO(goodsPo, userPo);
+        int newAmount = cartPo.getAmount() - modifyCartDto.getAmount();
+        if(newAmount <= 0){
+            cartRepo.delete(cartPo);
+            return null;
+        } else{
+            cartPo.setAmount(newAmount);
+            cartRepo.save(cartPo);
+            return PoToDtoTransformer.cartPoToCartItemDto(cartPo);
+        }
     }
 }

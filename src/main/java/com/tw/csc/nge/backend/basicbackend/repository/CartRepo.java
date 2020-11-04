@@ -11,5 +11,7 @@ public interface CartRepo extends PagingAndSortingRepository<CartPo, Long>{
 
     Page<CartPo> findByUserPO(UserPo userPo, Pageable pageable);
 
-    CartPo findByGoodsPO(GoodsPo goodsPo);
+    CartPo findByGoodsPOAndUserPO(GoodsPo goodsPo, UserPo userPo);
+    
+
 }

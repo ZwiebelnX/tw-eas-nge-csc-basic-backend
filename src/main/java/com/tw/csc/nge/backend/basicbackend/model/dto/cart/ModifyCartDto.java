@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AddToCartDto{
+public class ModifyCartDto{
     @NotEmpty(message = "商品ID不能为空")
     @Pattern(regexp = "\\d+", message = "商品ID错误")
     private String goodsId;

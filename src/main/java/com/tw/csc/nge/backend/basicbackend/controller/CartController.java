@@ -2,12 +2,13 @@ package com.tw.csc.nge.backend.basicbackend.controller;
 
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessException;
 import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessExceptionType;
-import com.tw.csc.nge.backend.basicbackend.model.dto.cart.AddToCartDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.cart.CartItemDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.cart.ModifyCartDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.pageable.PageableDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.service.CartService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -25,10 +26,10 @@ public class CartController{
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CartItemDto addGoodsToCart(@Valid @RequestBody AddToCartDto addToCartDto,
+    public CartItemDto addGoodsToCart(@Valid @RequestBody ModifyCartDto modifyCartDto,
                                       HttpSession httpSession){
         long userId = Long.parseLong(((UserDto)httpSession.getAttribute("userInfo")).getId());
-        return cartService.addGoodsToCart(addToCartDto, userId);
+        return cartService.addGoodsToCart(modifyCartDto, userId);
     }
 
     @GetMapping
@@ -45,7 +46,19 @@ public class CartController{
 
         long userId = Long.parseLong(((UserDto)httpSession.getAttribute("userInfo")).getId());
 
-        return cartService.getGoodsList(userId, pageNum, pageSize);
+        return cartService.getCartList(userId, pageNum, pageSize);
 
+    }
+
+    @DeleteMapping
+    public ResponseEntity<CartItemDto> reduceGoodsInCart(@Valid @RequestBody ModifyCartDto modifyCartDto,
+                                                         HttpSession httpSession){
+        long userId = Long.parseLong(((UserDto)httpSession.getAttribute("userInfo")).getId());
+        CartItemDto cartItemDto = cartService.reduceGoodsInCart(modifyCartDto, userId);
+        if(cartItemDto == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else{
+            return new ResponseEntity<>(cartItemDto, HttpStatus.OK);
+        }
     }
 }
