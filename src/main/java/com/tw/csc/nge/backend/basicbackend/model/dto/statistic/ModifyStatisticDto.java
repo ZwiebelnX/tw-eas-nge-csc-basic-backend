@@ -13,9 +13,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Builder
 public class ModifyStatisticDto{
-    @NotEmpty
+    @NotEmpty(message = "统计名称不能为空")
     private String statisticName;
 
-    @NotNull
+    @NotNull(message = "修改值不能为空")
     private int modifyValue;
 }
