@@ -6,6 +6,7 @@ import com.tw.csc.nge.backend.basicbackend.model.dto.goods.GoodsDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.pageable.PageableDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.GoodsPo;
 import com.tw.csc.nge.backend.basicbackend.repository.GoodsRepo;
+import com.tw.csc.nge.backend.basicbackend.utils.PoToDtoTransformer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -30,18 +31,8 @@ public class GoodsService{
         PageableDto<GoodsDto> goodsPageableDto = new PageableDto<>();
         goodsPageableDto.setTotalPages(goodsPoPage.getTotalPages());
         goodsPageableDto.setData(new ArrayList<>());
-        for(GoodsPo goodsPo: goodsPoPage){
-            GoodsDto goodsDto = GoodsDto.builder()
-                                        .id(String.valueOf(goodsPo.getId()))
-                                        .description(goodsPo.getDescription())
-                                        .imageUrl(goodsPo.getImageUrl())
-                                        .name(goodsPo.getName())
-                                        .price(goodsPo.getPrice())
-                                        .storeId(String.valueOf(goodsPo.getStorePO().getId()))
-                                        .storeName(goodsPo.getStorePO().getName())
-                                        .build();
-            goodsPageableDto.getData().add(goodsDto);
-        }
+
+        goodsPoPage.forEach((goodsPo -> goodsPageableDto.getData().add(PoToDtoTransformer.goodsPoToGoodsDto(goodsPo))));
         return goodsPageableDto;
     }
 

@@ -30,7 +30,6 @@ public class LoginControllerTest{
                .andExpect(status().isOk())
                .andExpect(jsonPath("$.id").exists())
                .andExpect(jsonPath("$.nickname").exists());
-
         loginDto = LoginDto.builder().loginName("Chen_Onion").password("12345678").build();
         mockMvc.perform(post("/login").contentType(MediaType.APPLICATION_JSON)
                                       .content(objectMapper.writeValueAsString(loginDto)))
