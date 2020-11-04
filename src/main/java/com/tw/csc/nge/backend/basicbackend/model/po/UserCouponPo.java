@@ -16,11 +16,11 @@ public class UserCouponPo extends BasicPo{
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserPo userPO;
+    private UserPo userPo;
 
     @ManyToOne
-    @JoinColumn(name = "coupon_id", nullable = false)
-    private CouponInfoPo couponPO;
+    @JoinColumn(name = "coupon_info_id", nullable = false)
+    private CouponInfoPo couponInfoPo;
 
     @Column(nullable = false)
     private Timestamp expireTime;

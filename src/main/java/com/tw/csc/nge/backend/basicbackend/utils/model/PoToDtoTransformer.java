@@ -1,10 +1,12 @@
 package com.tw.csc.nge.backend.basicbackend.utils.model;
 
 import com.tw.csc.nge.backend.basicbackend.model.dto.cart.CartItemDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.coupon.UserCouponDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.goods.GoodsDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.CartPo;
 import com.tw.csc.nge.backend.basicbackend.model.po.GoodsPo;
+import com.tw.csc.nge.backend.basicbackend.model.po.UserCouponPo;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
 
 public class PoToDtoTransformer{
@@ -36,5 +38,12 @@ public class PoToDtoTransformer{
                       .phone(userPo.getPhone())
                       .realName(userPo.getRealName())
                       .build();
+    }
+
+    public static UserCouponDto userCouponPoToUserCouponDto(UserCouponPo userCouponPo){
+        return UserCouponDto.builder().couponName(userCouponPo.getCouponInfoPo().getName())
+                            .storeId(String.valueOf(userCouponPo.getCouponInfoPo().getStorePO().getId()))
+                            .storeName(userCouponPo.getCouponInfoPo().getStorePO().getName())
+                            .expireTime(userCouponPo.getExpireTime()).build();
     }
 }
