@@ -32,7 +32,11 @@ public class LoginService{
 
         userMap.compute(userPo.getId(), (key, value) -> {
             if(value != null){
-                value.removeAttribute("userInfo");
+                try{
+                    value.removeAttribute("userInfo");
+                } catch(IllegalStateException e){
+                    e.printStackTrace();
+                }
             }
             return httpSession;
         });
