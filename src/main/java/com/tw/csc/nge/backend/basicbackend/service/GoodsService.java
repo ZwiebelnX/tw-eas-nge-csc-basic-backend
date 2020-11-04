@@ -5,7 +5,6 @@ import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessExceptionTyp
 import com.tw.csc.nge.backend.basicbackend.model.dto.goods.GoodsDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.pageable.PageableDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.GoodsPo;
-import com.tw.csc.nge.backend.basicbackend.model.po.StorePo;
 import com.tw.csc.nge.backend.basicbackend.repository.GoodsRepo;
 import com.tw.csc.nge.backend.basicbackend.utils.model.PoToDtoTransformer;
 import org.springframework.data.domain.Page;
@@ -38,20 +37,6 @@ public class GoodsService{
 
         goodsPoPage.forEach((goodsPo -> goodsPageableDto.getData().add(PoToDtoTransformer.goodsPoToGoodsDto(goodsPo))));
         return goodsPageableDto;
-    }
-
-    public PageableDto<GoodsDto> getGoodsListByStore(long storeId, int pageNum, int pageSize){
-        StorePo storePo = storeService.getStorePo(storeId);
-        Page<GoodsPo> goodsPoPage = goodsRepo.findByStorePO(storePo, PageRequest.of(pageNum - 1, pageSize));
-
-        PageableDto<GoodsDto> goodsListDto = PageableDto.<GoodsDto>builder()
-                .totalPages(goodsPoPage.getTotalPages())
-                .data(new ArrayList<>()).build();
-
-        goodsPoPage.forEach((value) -> goodsListDto.getData().add(PoToDtoTransformer.goodsPoToGoodsDto(value)));
-
-        return goodsListDto;
-
     }
 
     public GoodsPo getGoodsPo(long id){

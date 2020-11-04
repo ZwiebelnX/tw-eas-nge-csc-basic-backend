@@ -32,18 +32,4 @@ public class GoodsController{
 
         return goodsService.getGoodsList(pageNum, pageSize);
     }
-
-    @GetMapping("/{storeId}")
-    @ResponseStatus(HttpStatus.OK)
-    public PageableDto<GoodsDto> getGoodsListByStore(@PathVariable long storeId, @RequestParam int pageNum,
-                                                     @RequestParam(required = false, defaultValue = "10") int pageSize){
-        if(pageNum <= 0){
-            throw new BusinessException(BusinessExceptionType.GET_ARGUMENT_ILLEGAL, "页码不能小于1");
-        }
-        if(pageSize <= 0){
-            throw new BusinessException(BusinessExceptionType.GET_ARGUMENT_ILLEGAL, "页大小不能小于1");
-        }
-
-        return goodsService.getGoodsListByStore(storeId, pageNum, pageSize);
-    }
 }
