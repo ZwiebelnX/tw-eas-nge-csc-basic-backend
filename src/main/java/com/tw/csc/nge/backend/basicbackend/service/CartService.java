@@ -2,14 +2,18 @@ package com.tw.csc.nge.backend.basicbackend.service;
 
 import com.tw.csc.nge.backend.basicbackend.model.dto.cart.AddToCartDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.cart.CartItemDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.pageable.PageableDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.CartPo;
 import com.tw.csc.nge.backend.basicbackend.model.po.GoodsPo;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
 import com.tw.csc.nge.backend.basicbackend.repository.CartRepo;
 import com.tw.csc.nge.backend.basicbackend.utils.PoToDtoTransformer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 
 @Service
 public class CartService{
@@ -50,5 +54,17 @@ public class CartService{
                           .amount(cartPo.getAmount())
                           .build();
 
+    }
+
+    public PageableDto<CartItemDto> getGoodsList(long userId, int pageNum, int pageSize){
+        UserPo userPo = userService.getUserPo(userId);
+        Page<CartPo> cartPoPage = cartRepo.findByUserPO(userPo, PageRequest.of(pageNum - 1, pageSize));
+        PageableDto<CartItemDto> cartItemListDto =
+                PageableDto.<CartItemDto>builder().data(new ArrayList<>())
+                                                  .totalPages(cartPoPage.getTotalPages())
+                                                  .build();
+
+        cartPoPage.forEach(cartPo -> cartItemListDto.getData().add(PoToDtoTransformer.cartPoToCartItemDto(cartPo)));
+        return cartItemListDto;
     }
 }

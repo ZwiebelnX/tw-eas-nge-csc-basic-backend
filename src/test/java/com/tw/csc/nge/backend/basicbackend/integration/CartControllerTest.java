@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -55,6 +56,34 @@ public class CartControllerTest{
                                       .content(objectMapper.writeValueAsString(addToCartDto)).session(mockHttpSession))
                .andExpect(status().isUnprocessableEntity());
     }
+
+    @Test
+    public void should_return_cart_list_when_get_carts() throws Exception{
+        this.doLogin();
+        mockMvc.perform(get("/carts?pageNum=1&pageSize=10").session(mockHttpSession))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.data").exists());
+
+    }
+
+    @Test
+    public void should_throw_exception_when_get_carts_without_login() throws Exception{
+        mockMvc.perform(get("/carts").contentType(MediaType.APPLICATION_JSON))
+               .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    public void should_throw_error_when_get_carts_given_illegal_param() throws Exception{
+        this.doLogin();
+        mockMvc.perform(get("/carts?pageNum=-1&pageSize=10").session(mockHttpSession))
+               .andExpect(status().isUnprocessableEntity())
+               .andExpect(jsonPath("$.errorCode").value("42202"));
+
+        mockMvc.perform(get("/carts?pageNum=1&pageSize=-10").session(mockHttpSession))
+               .andExpect(status().isUnprocessableEntity())
+               .andExpect(jsonPath("$.errorCode").value("42202"));
+    }
+
 
     private void doLogin() throws Exception{
         LoginDto loginDto = LoginDto.builder().loginName("sicong.chen@163.com").password("12345678").build();
