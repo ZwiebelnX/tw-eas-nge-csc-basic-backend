@@ -1,10 +1,10 @@
 package com.tw.csc.nge.backend.basicbackend.model.dto.coupon;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
 
@@ -22,6 +22,6 @@ public class UserCouponDto{
 
     private String storeName;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Shanghai")
     private Timestamp expireTime;
 }
