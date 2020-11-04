@@ -6,6 +6,7 @@ import com.tw.csc.nge.backend.basicbackend.model.dto.login.LoginDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
 import com.tw.csc.nge.backend.basicbackend.repository.UserRepo;
+import com.tw.csc.nge.backend.basicbackend.utils.model.PoToDtoTransformer;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -35,13 +36,7 @@ public class LoginService{
             }
             return httpSession;
         });
-        UserDto userDto = UserDto.builder()
-                                 .id(String.valueOf(userPo.getId()))
-                                 .email(userPo.getEmail())
-                                 .nickname(userPo.getNickname())
-                                 .phone(userPo.getPhone())
-                                 .realName(userPo.getRealName())
-                                 .build();
+        UserDto userDto = PoToDtoTransformer.userPoToUserDto(userPo);
         httpSession.setAttribute("userInfo", userDto);
 
         return userDto;

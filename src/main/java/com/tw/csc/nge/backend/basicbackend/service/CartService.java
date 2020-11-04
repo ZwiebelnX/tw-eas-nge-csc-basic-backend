@@ -7,7 +7,7 @@ import com.tw.csc.nge.backend.basicbackend.model.po.CartPo;
 import com.tw.csc.nge.backend.basicbackend.model.po.GoodsPo;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
 import com.tw.csc.nge.backend.basicbackend.repository.CartRepo;
-import com.tw.csc.nge.backend.basicbackend.utils.PoToDtoTransformer;
+import com.tw.csc.nge.backend.basicbackend.utils.model.PoToDtoTransformer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -49,10 +49,7 @@ public class CartService{
         }
         cartRepo.save(cartPo);
 
-        return CartItemDto.builder()
-                          .goodsInfo(PoToDtoTransformer.goodsPoToGoodsDto(cartPo.getGoodsPO()))
-                          .amount(cartPo.getAmount())
-                          .build();
+        return PoToDtoTransformer.cartPoToCartItemDto(cartPo);
 
     }
 

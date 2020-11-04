@@ -1,9 +1,11 @@
-package com.tw.csc.nge.backend.basicbackend.utils;
+package com.tw.csc.nge.backend.basicbackend.utils.model;
 
 import com.tw.csc.nge.backend.basicbackend.model.dto.cart.CartItemDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.goods.GoodsDto;
+import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.CartPo;
 import com.tw.csc.nge.backend.basicbackend.model.po.GoodsPo;
+import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
 
 public class PoToDtoTransformer{
 
@@ -24,5 +26,15 @@ public class PoToDtoTransformer{
                           .amount(cartPo.getAmount())
                           .goodsInfo(goodsPoToGoodsDto(cartPo.getGoodsPO()))
                           .build();
+    }
+
+    public static UserDto userPoToUserDto(UserPo userPo){
+        return UserDto.builder()
+                      .id(String.valueOf(userPo.getId()))
+                      .email(userPo.getEmail())
+                      .nickname(userPo.getNickname())
+                      .phone(userPo.getPhone())
+                      .realName(userPo.getRealName())
+                      .build();
     }
 }

@@ -5,6 +5,7 @@ import com.tw.csc.nge.backend.basicbackend.common.exception.BusinessExceptionTyp
 import com.tw.csc.nge.backend.basicbackend.model.dto.user.UserDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.UserPo;
 import com.tw.csc.nge.backend.basicbackend.repository.UserRepo;
+import com.tw.csc.nge.backend.basicbackend.utils.model.DtoToPoTransformer;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,24 +17,17 @@ public class UserService{
         this.userRepo = userRepo;
     }
 
-    public UserDto registerUser(UserDto userDTO){
-        if(userRepo.existsByNicknameOrEmail(userDTO.getNickname(), userDTO.getEmail())){
+    public UserDto registerUser(UserDto userDto){
+        if(userRepo.existsByNicknameOrEmail(userDto.getNickname(), userDto.getEmail())){
             throw new BusinessException(BusinessExceptionType.USER_EXIST);
         }
 
-        UserPo userPO = UserPo.builder()
-                              .email(userDTO.getEmail())
-                              .nickname(userDTO.getNickname())
-                              .password(userDTO.getPassword())
-                              .phone(userDTO.getPhone())
-                              .realName(userDTO.getRealName())
-                              .isAdmin(false)
-                              .build();
+        UserPo userPO = DtoToPoTransformer.userDtoToUserPo(userDto);
 
         userRepo.save(userPO);
 
-        userDTO.setId(String.valueOf(userPO.getId()));
-        return userDTO;
+        userDto.setId(String.valueOf(userPO.getId()));
+        return userDto;
     }
 
     public UserPo getUserPo(long id){

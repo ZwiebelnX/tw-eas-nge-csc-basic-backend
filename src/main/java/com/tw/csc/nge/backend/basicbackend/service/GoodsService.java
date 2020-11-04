@@ -6,7 +6,7 @@ import com.tw.csc.nge.backend.basicbackend.model.dto.goods.GoodsDto;
 import com.tw.csc.nge.backend.basicbackend.model.dto.pageable.PageableDto;
 import com.tw.csc.nge.backend.basicbackend.model.po.GoodsPo;
 import com.tw.csc.nge.backend.basicbackend.repository.GoodsRepo;
-import com.tw.csc.nge.backend.basicbackend.utils.PoToDtoTransformer;
+import com.tw.csc.nge.backend.basicbackend.utils.model.PoToDtoTransformer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
